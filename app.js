@@ -36,10 +36,19 @@ app.use(helmet());
 app.use(cors());
 app.use(xss());
 
+//Swagger
+const swaggerUI = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
+
 //dummy route
 app.get('/', (req, res) => {
-  res.send('job api');
+  res.send('<h1>Jobs Api</h1><a href="/api-docs">Documentation</a>');
 });
+
+// swagger route
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
 // routes
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/jobs', auth, jobsRouter);
@@ -47,7 +56,7 @@ app.use('/api/v1/jobs', auth, jobsRouter);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 2000;
 
 const start = async () => {
   try {
