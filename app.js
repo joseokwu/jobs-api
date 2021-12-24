@@ -43,7 +43,7 @@ const swaggerDocument = YAML.load('./swagger.yaml');
 
 //dummy route
 app.get('/', (req, res) => {
-  res.send('<h1>Jobs Api</h1><a href="/api-docs">Documentation</a>');
+  res.send('<h1>Jobs Api</h1><a href="/api-docs">Documentation</a>');y
 });
 
 // swagger route
